@@ -1,6 +1,6 @@
 PYTHON = python
 
-.PHONY: setup data-collect data-split data-prepare train evaluate predict pipeline clean all
+.PHONY: setup data-collect data-split data-prepare train evaluate predict explain explain-batch pipeline clean all
 
 setup:
 	$(PYTHON) -m pip install -r requirements.txt
@@ -21,6 +21,12 @@ evaluate:
 
 predict:
 	$(PYTHON) src/predict.py --image $(IMG)
+
+explain:
+	$(PYTHON) src/explain.py --image $(IMG)
+
+explain-batch:
+	$(PYTHON) src/explain.py --n-images $(or $(N),3)
 
 pipeline: train evaluate
 
